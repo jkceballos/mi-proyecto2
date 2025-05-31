@@ -15,7 +15,9 @@ pipeline {
         stage('Desplegar') {
             steps {
                 sh '''
-                    docker-compose down
+                    docker rm -f app_web || true
+                    docker rm -f ci_jenkins || true
+                    docker-compose down || true
                     docker-compose up -d
                 '''
             }
